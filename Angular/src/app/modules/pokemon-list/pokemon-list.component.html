@@ -1,0 +1,30 @@
+<div class="container mx-auto">
+  <h1 class="text-2xl font-bold mt-4 mb-2">Lista de Pokémon</h1>
+
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+  >
+    <div
+      *ngFor="let pokemon of pokemons"
+      class="border border-gray-300 rounded p-4"
+      (click)="selectPokemon(pokemon)"
+    >
+      {{ pokemon.name }}
+    </div>
+  </div>
+  <!-- <div class="details-container" *ngIf="selectedPokemon">
+    <h2>Detalles del Pokémon</h2>
+    <p>Nombre: {{ selectedPokemon.name }}</p>
+  </div> -->
+  <app-pokemon-detail [selectedPokemon]="selectedPokemon"></app-pokemon-detail>
+
+  <div class="flex justify-center mt-4">
+    <ngb-pagination
+      [collectionSize]="totalItems"
+      [(page)]="currentPage"
+      [pageSize]="itemsPerPage"
+      (pageChange)="onPageChange($event)"
+      [maxSize]="5"
+    ></ngb-pagination>
+  </div>
+</div>

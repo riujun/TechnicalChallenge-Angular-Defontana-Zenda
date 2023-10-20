@@ -1,0 +1,8 @@
+<div *ngIf="pokemonDetails">
+  <h2>Detalles del Pokémon</h2>
+  <p>Nombre: {{ pokemonDetails.name }}</p>
+  <p>Base Experience: {{ pokemonDetails.base_experience }}</p>
+  <p>abilidad: {{ pokemonDetails.abilities[0].ability.name }}</p>
+
+  <!-- Puedes mostrar otros detalles aquí -->
+</div>
