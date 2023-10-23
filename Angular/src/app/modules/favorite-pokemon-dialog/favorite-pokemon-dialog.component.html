@@ -1,4 +1,27 @@
-<h2>Detalles del Pokémon Favorito</h2>
-<p>Nombre: {{ data.name }}</p>
-<p>Base Experience: {{ data.baseExperience }}</p>
-<p>Habilidades: {{ data.abilities.join(", ") }}</p>
+<div class="p-4 bg-blue-100">
+  <h2 class="text-2xl font-bold">Detalles del Pokémon Favorito</h2>
+  <p class="mt-2"><strong>Nombre:</strong> {{ data.name }}</p>
+  <p class="mt-2">
+    <strong>Base Experience:</strong> {{ data.baseExperience }}
+  </p>
+  <p class="mt-2">
+    <strong>Habilidades:</strong> {{ data.abilities.join(", ") }}
+  </p>
+  <p class="mt-2"><strong>Tipo:</strong> {{ data.type }}</p>
+  <p class="mt-2"><strong>Altura:</strong> {{ data.height }} m</p>
+  <p class="mt-2"><strong>Peso:</strong> {{ data.weight }} kg</p>
+  <p class="mt-2"><strong>Estadísticas:</strong> {{ data.stats }}</p>
+
+  <div class="mt-4">
+    <img
+      [src]="data.image"
+      alt="{{ data.name }}"
+      class="mx-auto mt-4 w-40 h-40 border border-gray-400 rounded-lg p-1"
+    />
+    <img
+      [src]="data.image2D"
+      alt="{{ data.name }}"
+      class="mx-auto mt-4 w-40 h-40 border border-gray-400 rounded-lg p-1"
+    />
+  </div>
+</div>

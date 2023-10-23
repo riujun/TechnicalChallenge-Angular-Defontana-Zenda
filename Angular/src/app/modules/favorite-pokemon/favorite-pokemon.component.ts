@@ -29,11 +29,19 @@ export class FavoritePokemonComponent {
 
     this.http.get(apiUrl).subscribe((data: any) => {
       const dialogRef = this.dialog.open(FavoritePokemonDialogComponent, {
-        width: '250px',
+        width: '450px', // Aumenté el ancho para que quepa más información
         data: {
           name: data.name,
           baseExperience: data.base_experience,
-          abilities: data.abilities.map((ability: any) => ability.ability.name)
+          abilities: data.abilities.map((ability: any) => ability.ability.name),
+          image: data.sprites.front_default, // URL de la imagen del Pokémon (front_default)
+          image2D: data.sprites.back_default, // URL de la imagen 2D "back_default"
+          type: data.types.map((type: any) => type.type.name).join(", "), // Tipos del Pokémon
+          height: data.height / 10, // Altura en metros
+          weight: data.weight / 10, // Peso en kilogramos
+          // Agregamos información adicional
+          // Información sobre las estadísticas del Pokémon
+          stats: data.stats.map((stat: any) => `${stat.stat.name}: ${stat.base_stat}`).join(", "),
         }
       });
 
@@ -41,5 +49,5 @@ export class FavoritePokemonComponent {
         console.log(`Dialog result: ${result}`);
       });
     });
-  }
+}
 }

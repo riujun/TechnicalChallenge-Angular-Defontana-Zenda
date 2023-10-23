@@ -1,8 +1,35 @@
-<div *ngIf="pokemonDetails">
-  <h2>Detalles del Pokémon</h2>
-  <p>Nombre: {{ pokemonDetails.name }}</p>
-  <p>Base Experience: {{ pokemonDetails.base_experience }}</p>
-  <p>abilidad: {{ pokemonDetails.abilities[0].ability.name }}</p>
+<div
+  *ngIf="pokemonDetails"
+  class="p-4 text-center border border-gray-300 rounded bg-red-500 text-white"
+>
+  <h2 class="text-2xl font-bold">Detalles del Pokémon</h2>
+
+  <!-- Imagen con borde más notorio -->
+  <img
+    [src]="pokemonDetails.sprites.front_default"
+    alt="{{ pokemonDetails.name }}"
+    class="mx-auto mt-4 w-40 h-40 border-4 border-red-800 rounded-lg p-1"
+  />
+
+  <p class="mt-2"><strong>Nombre:</strong> {{ pokemonDetails.name }}</p>
+  <p class="mt-2">
+    <strong>Base Experience:</strong> {{ pokemonDetails.base_experience }}
+  </p>
+  <p class="mt-2">
+    <strong>Tipo:</strong> {{ pokemonDetails.types[0].type.name }}
+  </p>
+  <p class="mt-2">
+    <strong>Altura:</strong> {{ pokemonDetails.height / 10 }} m
+  </p>
+  <p class="mt-2"><strong>Peso:</strong> {{ pokemonDetails.weight / 10 }} kg</p>
+  <p class="mt-2">
+    <strong>Habilidad:</strong> {{ pokemonDetails.abilities[0].ability.name }}
+  </p>
+
+  <!-- Otras habilidades -->
+  <div class="mt-2" *ngFor="let ability of pokemonDetails.abilities.slice(1)">
+    <strong>Otra Habilidad:</strong> {{ ability.ability.name }}
+  </div>
 
   <!-- Puedes mostrar otros detalles aquí -->
 </div>
