@@ -1,12 +1,4 @@
 <div *ngFor="let favorite of favoritePokemons" class="favorite-pokemon">
-  <div (click)="showFavoriteDetails(favorite)">
-    <span>{{ favorite.name }}</span>
-  </div>
+  <span (click)="openDialog(favorite)">{{ favorite.name }}</span>
   <button (click)="removeFromFavorites(favorite)">❌</button>
-  <div *ngIf="favorite.showDetails">
-    <h2>Detalles del Pokémon</h2>
-    <p>Nombre: {{ favorite.details.name }}</p>
-    <p>Base Experience: {{ favorite.details.base_experience }}</p>
-    <p>Habilidad: {{ favorite.details.abilities[0].ability.name }}</p>
-  </div>
 </div>

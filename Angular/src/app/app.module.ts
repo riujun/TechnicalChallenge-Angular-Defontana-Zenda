@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http'; // Agrega esta línea
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +12,7 @@ import { AlphabetSummaryComponent } from './modules/alphabet-summary/alphabet-su
 import { FavoritePokemonComponent } from './modules/favorite-pokemon/favorite-pokemon.component';
 import { SharedComponent } from './modules/shared/shared.component';
 import { PokemonDetailComponent } from './modules/pokemon-detail/pokemon-detail.component';
+import { FavoritePokemonDialogComponent } from './modules/favorite-pokemon-dialog/favorite-pokemon-dialog.component';
 
 @NgModule({
   declarations: [
@@ -20,8 +22,10 @@ import { PokemonDetailComponent } from './modules/pokemon-detail/pokemon-detail.
     FavoritePokemonComponent,
     SharedComponent,
     PokemonDetailComponent,
+    FavoritePokemonDialogComponent,
   ],
   imports: [
+    MatDialogModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
