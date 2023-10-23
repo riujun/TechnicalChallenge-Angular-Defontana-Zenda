@@ -1,1 +1,4 @@
-<p>favorite-pokemon works!</p>
+<div *ngFor="let favorite of favoritePokemons" class="favorite-pokemon">
+  <span>{{ favorite.name }}</span>
+  <button (click)="removeFromFavorites(favorite)">❌</button>
+</div>

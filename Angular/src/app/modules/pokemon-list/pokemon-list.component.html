@@ -1,3 +1,11 @@
+<div *ngIf="favoritePokemons.length > 0" class="favorite-pokemon-container">
+  <h2>Mis Pokémon Favoritos</h2>
+  <app-favorite-pokemon
+    [favoritePokemons]="favoritePokemons"
+    (addFavorite)="markAsFavorite($event)"
+  ></app-favorite-pokemon>
+</div>
+
 <div class="container mx-auto">
   <h1 class="text-2xl font-bold mt-4 mb-2">Lista de Pokémon</h1>
 
@@ -10,6 +18,9 @@
       (click)="selectPokemon(pokemon)"
     >
       {{ pokemon.name }}
+      <button (click)="markAsFavorite(pokemon)">
+        <span [class.text-red-500]="isFavorite(pokemon)">❤️</span>
+      </button>
     </div>
   </div>
   <!-- <div class="details-container" *ngIf="selectedPokemon">
@@ -27,4 +38,22 @@
       [maxSize]="5"
     ></ngb-pagination>
   </div>
+</div>
+
+<div class="mt-4">
+  <h2>Tabla Resumen de Pokémon por Letra</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Letra</th>
+        <th>Cantidad</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of summary">
+        <td>{{ item.letter }}</td>
+        <td>{{ item.count }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
