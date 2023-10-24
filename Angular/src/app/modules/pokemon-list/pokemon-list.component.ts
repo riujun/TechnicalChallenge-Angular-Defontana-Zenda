@@ -1,4 +1,4 @@
-import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -7,15 +7,16 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./pokemon-list.component.css']
 })
 export class PokemonListComponent implements OnInit {
-  @Output() addFavorite = new EventEmitter<any>(); // Evento para agregar a favoritos
+  @Output() addFavorite = new EventEmitter<any>();
 
-  
-  selectedPokemon: any; // Declarar la propiedad para el Pokémon seleccionado
+  selectedPokemon: any;
   favoritePokemons: any[] = [];
   pokemons: any[] = [];
   currentPage: number = 1;
   itemsPerPage: number = 20;
   totalItems: number = 0;
+  isSearching: boolean = false;
+  searchQuery: string = '';
 
   // Nueva propiedad para la tabla resumen
   summary: { letter: string; count: number }[] = [];
@@ -24,27 +25,49 @@ export class PokemonListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPokemons();
-    console.log(this.favoritePokemons)
+  }
+  onSearchChange(event: Event) {
+    this.searchQuery = (event.target as HTMLInputElement).value;
+    this.currentPage = 1;
+    this.isSearching = !!this.searchQuery;
+  
+    // Permitir búsquedas con 1 palabra o más de 6 caracteres
+    if (!this.searchQuery || this.searchQuery.length === 1 || this.searchQuery.length > 6) {
+      this.getPokemons();
+    }
+  }
+
+  resetSearch() {
+    this.isSearching = false;  // Añade esta línea para indicar que ya no estás buscando
+    this.searchQuery = ''; // Restablecer el campo de búsqueda
+    this.getPokemons(); // Volver a obtener la lista de Pokémon
   }
 
   getPokemons() {
     const apiUrl = 'https://pokeapi.co/api/v2/pokemon';
     const offset = (this.currentPage - 1) * this.itemsPerPage;
-
-    this.http.get(`${apiUrl}?offset=${offset}&limit=${this.itemsPerPage}`).subscribe((data: any) => {
-      this.pokemons = data.results;
-      this.totalItems = data.count;
-
-      // Generar la tabla resumen al recibir los datos
+  
+    let apiUrlWithFilter = apiUrl;
+    if (this.isSearching) {
+      apiUrlWithFilter = `${apiUrl}?limit=${this.totalItems}`;
+    } else {
+      apiUrlWithFilter = `${apiUrl}?offset=${offset}&limit=${this.itemsPerPage}`;
+    }
+  
+    this.http.get(apiUrlWithFilter).subscribe((data: any) => {
+      if (this.isSearching) {
+        this.pokemons = data.results
+          .filter((pokemon: any) => pokemon.name.includes(this.searchQuery.toLowerCase()));
+        this.totalItems = this.pokemons.length;
+      } else {
+        this.pokemons = data.results;
+        this.totalItems = data.count;
+      }
       this.generateSummary();
-
     });
   }
- 
 
-  
-
-  selectPokemon(pokemon: any) { // Método para seleccionar un Pokémon
+  selectPokemon(pokemon: any) {
     this.selectedPokemon = pokemon;
   }
 
@@ -52,10 +75,11 @@ export class PokemonListComponent implements OnInit {
     this.currentPage = page;
     this.getPokemons();
   }
+
   markAsFavorite(pokemon: any) {
     if (!this.isFavorite(pokemon)) {
       this.favoritePokemons.push(pokemon);
-      this.addFavorite.emit(pokemon); // Emitir evento para agregar a favoritos
+      this.addFavorite.emit(pokemon);
     }
   }
 
@@ -63,11 +87,8 @@ export class PokemonListComponent implements OnInit {
     return this.favoritePokemons.some((favPokemon) => favPokemon.name === pokemon.name);
   }
 
-  
-
-  // Método para generar la tabla resumen
   generateSummary() {
-    const letterCountMap: { [key: string]: number } = {}; // Especifica el tipo de letterCountMap
+    const letterCountMap: { [key: string]: number } = {};
     this.pokemons.forEach((pokemon: any) => {
       const firstLetter = pokemon.name[0].toUpperCase();
       if (letterCountMap[firstLetter]) {
@@ -76,11 +97,10 @@ export class PokemonListComponent implements OnInit {
         letterCountMap[firstLetter] = 1;
       }
     });
-  
+
     this.summary = Object.keys(letterCountMap).map((letter) => ({
       letter,
       count: letterCountMap[letter],
     }));
   }
-  
 }

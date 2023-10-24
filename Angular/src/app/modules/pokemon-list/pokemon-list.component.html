@@ -1,3 +1,21 @@
+<div class="container mx-auto my-4">
+  <div class="flex items-center space-x-4">
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      (input)="onSearchChange($event)"
+      placeholder="Buscar Pokémon por nombre"
+      class="p-2 border border-gray-300 rounded shadow-md"
+    />
+    <button
+      class="px-4 py-2 bg-red-500 text-white rounded shadow-md"
+      (click)="resetSearch()"
+    >
+      Limpiar
+    </button>
+  </div>
+</div>
+
 <div
   class="container mx-auto border border-black bg-[#08AEEA] bg-gradient-to-r from-[#08AEEA] via-[#2AF598] to-[#08AEEA] text-white"
 >
