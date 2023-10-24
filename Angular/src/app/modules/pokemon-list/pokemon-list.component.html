@@ -1,6 +1,8 @@
-<div class="container mx-auto border border-black bg-[#FEFEDF]">
+<div
+  class="container mx-auto border border-black bg-[#08AEEA] bg-gradient-to-r from-[#08AEEA] via-[#2AF598] to-[#08AEEA] text-white"
+>
   <div class="flex items-center justify-center">
-    <div *ngIf="favoritePokemons.length > 0" class="bg-blue-200 p-4 rounded-lg">
+    <div *ngIf="favoritePokemons.length > 0" class="p-4 rounded-lg">
       <app-favorite-pokemon
         [favoritePokemons]="favoritePokemons"
         (addFavorite)="markAsFavorite($event)"
@@ -9,7 +11,7 @@
   </div>
 </div>
 
-<div class="container mx-auto flex border border-black">
+<div class="container mx-auto flex border border-black bg-blue-500">
   <div class="w-3/4 p-4">
     <h1 class="text-2xl font-bold mb-2">Lista de Pokémon</h1>
 
@@ -21,7 +23,7 @@
         class="border border-gray-300 rounded p-4 cursor-pointer bg-[#FEFEDF]"
         (click)="selectPokemon(pokemon)"
       >
-        {{ pokemon.name }}
+        <span class="text-black">{{ pokemon.name }}</span>
         <button (click)="markAsFavorite(pokemon)">
           <span [class.text-red-500]="isFavorite(pokemon)">❤️</span>
         </button>
@@ -46,18 +48,18 @@
   </div>
 </div>
 
-<div class="mt-4 text-center">
+<div class="mt-4 text-center bg-yellow-500 text-white">
   <h2 class="text-2xl font-bold">Tabla Resumen de Pokémon por Letra</h2>
-  <div class="bg-blue-200 rounded-lg p-4">
-    <table class="w-full border-collapse border border-blue-400">
+  <div class="bg-purple-500 rounded-lg p-4">
+    <table class="w-full border-collapse border border-purple-600">
       <thead>
-        <tr class="bg-blue-500 text-white">
+        <tr class="bg-purple-700 text-white">
           <th class="p-2">Letra</th>
           <th class="p-2">Cantidad</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of summary" class="bg-blue-100">
+        <tr *ngFor="let item of summary" class="bg-purple-300 text-white">
           <td class="p-2">{{ item.letter }}</td>
           <td class="p-2">{{ item.count }}</td>
         </tr>

@@ -13,6 +13,7 @@ import { FavoritePokemonComponent } from './modules/favorite-pokemon/favorite-po
 import { SharedComponent } from './modules/shared/shared.component';
 import { PokemonDetailComponent } from './modules/pokemon-detail/pokemon-detail.component';
 import { FavoritePokemonDialogComponent } from './modules/favorite-pokemon-dialog/favorite-pokemon-dialog.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FavoritePokemonDialogComponent } from './modules/favorite-pokemon-dialo
     SharedComponent,
     PokemonDetailComponent,
     FavoritePokemonDialogComponent,
+    HomeComponent,
   ],
   imports: [
     MatDialogModule,

@@ -1,15 +1,13 @@
 <div class="container mx-auto">
   <div class="flex justify-center mt-4 mb-2">
-    <!-- Agregadas las clases flex y justify-center para centrar -->
     <h2 class="text-2xl font-bold">Mis Pokémon Favoritos</h2>
   </div>
   <div class="flex flex-wrap max-w-screen-xl mx-auto space-x-4">
     <ng-container *ngFor="let favorite of favoritePokemons">
-      <div class="border border-black rounded p-4 cursor-pointer">
-        <span
-          class="cursor-pointer text-blue-600"
-          (click)="openDialog(favorite)"
-        >
+      <div
+        class="border border-black rounded p-4 cursor-pointer text-[#6284FF] bg-[#FF0000] bg-gradient-to-r from-[#FF0000] via-[#6284FF] to-[#FF0000]"
+      >
+        <span class="cursor-pointer text-black" (click)="openDialog(favorite)">
           {{ favorite.name }}
         </span>
         <button (click)="removeFromFavorites(favorite)" class="text-red-500">
