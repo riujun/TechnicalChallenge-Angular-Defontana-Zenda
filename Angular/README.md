@@ -36,6 +36,7 @@ Para ejecutar Pokédex en tu entorno de desarrollo local, necesitas lo siguiente
       Una vez que la aplicación esté en ejecución, puedes empezar a explorar Pokémon:
       
       Haz clic en un Pokémon para ver sus detalles.
+      Puedes hacer busqueda por nombre del pokemon.
       Marca tus Pokémon favoritos haciendo clic en el corazón.
       Descubre información sobre el nombre, altura, peso y habilidades de un Pokémon.
       Contiene tabla resumen por camtidad que inician con cada letra del abecedario en la paginacion
